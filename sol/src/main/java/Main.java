@@ -34,7 +34,8 @@ public class Main {
                         count("*").as("count"),
                         countDistinct("url").as("uniqueURLVisits"))
                 .select(col("*"),
-                        col("endTime").cast("long").minus(col("startTime").cast("long")).as("duration"));
+                        col("endTime").cast("long").minus(col("startTime").cast("long")).as("duration"))
+                .cache();
         
 
         session.write().option("header", "true").csv("../data/session");
